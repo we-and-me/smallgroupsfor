@@ -1,0 +1,28 @@
+# Private — kept local only, never published to the public Pages repo
+CLAUDE.md
+README.md
+toolkit/
+vercel.json
+
+# Vercel
+.vercel
+
+# macOS
+.DS_Store
+
+# Editor folders
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local previews / dev artifacts
+.cache/
+preview.png
+preview_*.png
+*.tmp
