@@ -4,7 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Small Groups for ____ · An experimental series from We and Me</title>
-<meta name="description" content="An experimental series of free 60-minute small groups facilitated live by Chad Littlefield. Three days only, Sep 8–10, 2026." />
+<meta name="description" content="An experimental series of free 45-minute small groups facilitated live by Chad Littlefield. Three days only, Sep 14–16, 2026." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://smallgroups.weand.me/" />
+<meta property="og:title" content="Small Groups for ____ · An experimental series from We and Me" />
+<meta property="og:description" content="An experimental series of free 45-minute small groups facilitated live by Chad Littlefield. Three days only, Sep 14–16, 2026." />
+<meta name="twitter:card" content="summary" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Jost:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -229,7 +234,9 @@
   .grid {
     display: grid;
     gap: 24px;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 880px;
+    margin: 0 auto;
   }
   .card {
     background: #ffffff;
@@ -305,6 +312,30 @@
   .purple .cta { color: var(--we-purple); }
   .purple .cta:hover { background: var(--we-purple); color: #ffffff; }
 
+  /* Locked CTA (alumni card): styled like a button, not clickable */
+  .cta-locked {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 1rem;
+    align-self: flex-start;
+    border: 2px solid #C9C9CE;
+    color: #8A8A90;
+    background: #F7F7F8;
+    cursor: default;
+  }
+  .card-note {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--we-purple);
+  }
+
   /* ====== CLOSING ====== */
   .closing {
     margin: 88px auto 0;
@@ -360,20 +391,6 @@
     max-width: 520px;
     margin: 0 auto;
   }
-  .email-cta {
-    display: inline-block;
-    margin-top: 22px;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(1.2rem, 2vw, 1.45rem);
-    color: var(--we-purple);
-    text-decoration: none;
-    border-bottom: 3px solid var(--we-purple);
-    padding-bottom: 3px;
-    transition: opacity .2s ease;
-  }
-  .email-cta:hover { opacity: 0.7; }
-
   /* ====== QUOTE (MOVED to bottom) ====== */
   .quote {
     max-width: 720px;
@@ -426,6 +443,9 @@
   }
 
   /* ====== RESPONSIVE ====== */
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+  }
   @media (max-width: 600px) {
     .page { padding: 48px 18px 60px; }
     .format { grid-template-columns: 1fr; }
@@ -485,21 +505,33 @@
   <!-- SECTION HEAD -->
   <!-- ============================================================ -->
   <section class="section-head">
-    <span class="experiment-tag">Sep 8–10, 2026 only</span>
+    <span class="experiment-tag">Sep 14–16, 2026 only</span>
     <h2>Choose your session</h2>
-    <p><em>Why?</em> It’s freeing to be with people who speak your language and just “get you.” It also opens new doors and possibilities.</p>
+    <p><em>Why?</em> Small groups are the units of transformation. It’s freeing to be with people who speak your language and just “get you.”</p>
     <p class="section-head-note">* Each session happens just once and will not be recorded.</p>
   </section>
 
   <!-- ============================================================ -->
-  <!-- CARDS GRID (Wednesdays) -->
+  <!-- CARDS GRID -->
   <!-- ============================================================ -->
   <div class="grid">
+
+    <article class="card purple">
+      <div class="card-stripe"></div>
+      <div class="card-body">
+        <span class="date-pill">Mon · Sep 14</span>
+        <h3>Connectors Summit alumni</h3>
+        <p class="card-time">10:00 AM ET · 45 min</p>
+        <p class="card-desc">For everyone who has already been in the Summit room. A reunion of connectors: what you tried, what stuck, and what’s next.</p>
+        <span class="cta-locked">available only to Summit alum</span>
+        <p class="card-note">Your invite is in your email.</p>
+      </div>
+    </article>
 
     <article class="card blue">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Tue · Sep 8</span>
+        <span class="date-pill">Mon · Sep 14</span>
         <h3>Coaches, speakers &amp; solopreneurs</h3>
         <p class="card-time">12:00 PM ET · 45 min</p>
         <p class="card-desc">For the folks building businesses on relationship. How do we grow without burning out the very thing that makes us good at this?</p>
@@ -510,7 +542,7 @@
     <article class="card green">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Tue · Sep 8</span>
+        <span class="date-pill">Mon · Sep 14</span>
         <h3>L&amp;D pros, internal trainers &amp; facilitators</h3>
         <p class="card-time">2:00 PM ET · 45 min</p>
         <p class="card-desc">For the people inside organizations whose job is talent development and learning. A place to network and discover what’s working.</p>
@@ -521,7 +553,7 @@
     <article class="card purple">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Wed · Sep 9</span>
+        <span class="date-pill">Tue · Sep 15</span>
         <h3>Nonprofit leaders &amp; community builders</h3>
         <p class="card-time">11:00 AM ET · 45 min</p>
         <p class="card-desc">For the people stitching neighborhoods, missions, and movements together. Bring a problem, leave with a possibility.</p>
@@ -532,7 +564,7 @@
     <article class="card blue">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Wed · Sep 9</span>
+        <span class="date-pill">Tue · Sep 15</span>
         <h3>Government &amp; public sector leaders</h3>
         <p class="card-time">1:00 PM ET · 45 min</p>
         <p class="card-desc">For the folks doing important work and solving problems inside agencies, departments, and civic offices.</p>
@@ -543,7 +575,7 @@
     <article class="card green">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Wed · Sep 9</span>
+        <span class="date-pill">Tue · Sep 15</span>
         <h3>Higher ed faculty &amp; staff</h3>
         <p class="card-time">3:00 PM ET · 45 min</p>
         <p class="card-desc">For faculty, student affairs, and extension professionals in colleges and universities. A space to compare notes across silos.</p>
@@ -554,7 +586,7 @@
     <article class="card purple">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Thu · Sep 10</span>
+        <span class="date-pill">Wed · Sep 16</span>
         <h3>K–12 educators &amp; school leaders</h3>
         <p class="card-time">12:00 PM ET · 45 min</p>
         <p class="card-desc">For teachers, principals, and district leaders making school possible. Education is tough right now. Come learn something to make it easier.</p>
@@ -565,7 +597,7 @@
     <article class="card blue">
       <div class="card-stripe"></div>
       <div class="card-body">
-        <span class="date-pill">Thu · Sep 10</span>
+        <span class="date-pill">Wed · Sep 16</span>
         <h3>Faith leaders &amp; contemplative practitioners</h3>
         <p class="card-time">2:00 PM ET · 45 min</p>
         <p class="card-desc">For pastors, lay leaders, and practitioners pushing the boundaries of what’s possible when their communities gather.</p>
@@ -580,8 +612,7 @@
   <!-- ============================================================ -->
   <section class="suggest">
     <h2>Don’t see your community here?</h2>
-    <p>If you’d love a small group for a niche we haven’t named, write to me. I want to hear who we missed. Run a community of 100+ you could rally for a live session? I’ll consider hosting one just for your peeps.</p>
-    <a class="email-cta" href="mailto:chad@weand.me">chad@weand.me</a>
+    <p>Choose the group that feels like the closest fit. We know no human being can or should ever be put in a box. We also know it wasn’t practical for Chad to host an infinite number of sessions. He did the math.</p>
   </section>
 
   <!-- ============================================================ -->
