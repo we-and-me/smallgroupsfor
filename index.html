@@ -732,6 +732,8 @@
 
   function openModal(e) {
     e.preventDefault();
+    if (!modal.hidden) return;
+    frame.innerHTML = '';
     var iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0';
     iframe.title = 'The two-minute story that sparked this experiment';
@@ -739,7 +741,8 @@
     iframe.setAttribute('allowfullscreen', '');
     frame.appendChild(iframe);
     modal.hidden = false;
-    requestAnimationFrame(function() { modal.classList.add('open'); });
+    void modal.offsetHeight;
+    modal.classList.add('open');
     document.body.style.overflow = 'hidden';
     closeBtn.focus();
     document.addEventListener('keydown', onKey);
