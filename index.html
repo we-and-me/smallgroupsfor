@@ -172,6 +172,63 @@
     flex-shrink: 0;
   }
 
+  /* ====== VIDEO LIGHTBOX ====== */
+  .video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(30, 30, 34, 0.78);
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .video-modal.open { opacity: 1; }
+  .video-dialog {
+    position: relative;
+    width: min(920px, 100%);
+  }
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,.45);
+  }
+  .video-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-close {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    color: var(--heading);
+    font-size: 18px;
+    line-height: 1;
+    font-family: var(--body);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s ease;
+  }
+  .video-close:hover { transform: scale(1.08); }
+  @media (prefers-reduced-motion: reduce) {
+    .video-modal { transition: none; }
+    .video-close { transition: none; }
+  }
+
   /* ====== FORMAT STRIP ====== */
   .format {
     margin: 48px auto 0;
@@ -652,6 +709,57 @@
   </footer>
 
 </main>
+
+<!-- ============================================================ -->
+<!-- VIDEO LIGHTBOX -->
+<!-- ============================================================ -->
+<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="The two-minute story behind this experiment" hidden>
+  <div class="video-dialog">
+    <button class="video-close" type="button" aria-label="Close video">✕</button>
+    <div class="video-frame"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var link = document.querySelector('.video-link');
+  var modal = document.getElementById('video-modal');
+  if (!link || !modal) return;
+  var frame = modal.querySelector('.video-frame');
+  var closeBtn = modal.querySelector('.video-close');
+  var VIDEO_ID = 'gCikwfvJCKI';
+
+  function openModal(e) {
+    e.preventDefault();
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0';
+    iframe.title = 'The two-minute story that sparked this experiment';
+    iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', '');
+    frame.appendChild(iframe);
+    modal.hidden = false;
+    requestAnimationFrame(function() { modal.classList.add('open'); });
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.hidden = true;
+    frame.innerHTML = '';
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKey);
+    link.focus();
+  }
+
+  function onKey(e) { if (e.key === 'Escape') closeModal(); }
+
+  link.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+})();
+</script>
 
 <!-- ============================================================ -->
 <!-- SLOT MACHINE SCRIPT -->
