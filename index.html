@@ -161,6 +161,16 @@
     transition: opacity 0.2s ease;
   }
   .lede-link:hover { opacity: 0.7; }
+  .video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .play-icon {
+    width: 1.2em;
+    height: 1.2em;
+    flex-shrink: 0;
+  }
 
   /* ====== FORMAT STRIP ====== */
   .format {
@@ -507,8 +517,9 @@
   <section class="section-head">
     <span class="experiment-tag">Sep 14–16, 2026 only</span>
     <h2>Choose your session</h2>
-    <p><em>Why?</em> Small groups are the units of transformation. It’s freeing to be with people who speak your language and just “get you.” <a class="lede-link" href="https://www.youtube.com/watch?v=gCikwfvJCKI" target="_blank" rel="noopener">Here’s the two-minute story that sparked this whole experiment.</a></p>
-    <p class="section-head-note">* Each session happens just once and will not be recorded. Most people pick one. If two groups fit your world, you’re welcome in both.</p>
+    <p><em>Why?</em> Small groups are the units of transformation. It’s freeing to be with people who speak your language and just “get you.”</p>
+    <p><a class="lede-link video-link" href="https://www.youtube.com/watch?v=gCikwfvJCKI" target="_blank" rel="noopener"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor" opacity="0.15"/><path d="M9.8 7.5v9l7-4.5z" fill="currentColor"/></svg>Here’s the two-minute story that sparked this whole experiment.</a></p>
+    <p class="section-head-note">* Each session happens just once and will not be recorded. The invite is to pick just the one group that fits you best, to ensure space for everyone.</p>
   </section>
 
   <!-- ============================================================ -->
