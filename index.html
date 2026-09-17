@@ -459,6 +459,10 @@
     max-width: 520px;
     margin: 0 auto;
   }
+  .capsule-line {
+    text-align: center;
+    margin: 44px auto 0;
+  }
   .summit-cta {
     display: inline-block;
     margin-top: 24px;
@@ -562,7 +566,7 @@
   <!-- MASTHEAD (no logo) -->
   <!-- ============================================================ -->
   <header class="masthead">
-    <p class="eyebrow">an experimental series · complete</p>
+    <p class="eyebrow">an experimental series</p>
 
     <h1 class="wordmark">
       <span class="static-text">Small groups for</span>
@@ -575,47 +579,23 @@
     </h1>
 
     <p class="lede">
-      <strong>Free, live, and facilitated by <a class="lede-link" href="https://weand.me/chad-littlefield/">Chad Littlefield</a>.</strong> For three days in September 2026, small groups of peers met on Zoom, niche by niche, for the kind of conversation that otherwise wouldn’t happen, with people they otherwise wouldn’t have met.
+      <strong>This experiment ran once, Sep 14–16, 2026, and was loved by all.</strong> Eight small groups, facilitated live by <a class="lede-link" href="https://weand.me/chad-littlefield/">Chad Littlefield</a>. As promised, one time only.
     </p>
   </header>
-
-  <!-- ============================================================ -->
-  <!-- FORMAT STRIP -->
-  <!-- ============================================================ -->
-  <section class="format">
-    <div><strong>8 sessions</strong><span>across three days</span></div>
-    <div><strong>45 min</strong><span>each, start to finish</span></div>
-    <div><strong>0 recordings</strong><span>on purpose</span></div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- SECTION HEAD -->
-  <!-- ============================================================ -->
-  <section class="section-head">
-    <span class="experiment-tag">Sep 14–16, 2026 · that’s a wrap</span>
-    <h2>This experiment worked.</h2>
-    <p><em>The verdict?</em> A huge success, loved by all. And, as promised, a one-time initiative. Small groups are the units of transformation, and for three days these rooms proved it.</p>
-    <p><a class="lede-link video-link" href="https://www.youtube.com/watch?v=gCikwfvJCKI" target="_blank" rel="noopener"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor" opacity="0.15"/><path d="M9.8 7.5v9l7-4.5z" fill="currentColor"/></svg>Here’s the two-minute story that sparked this whole experiment.</a></p>
-    <p class="section-head-note">* Each session happened just once and was not recorded. That was the point.</p>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- TIME CAPSULE: WHO GATHERED -->
-  <!-- ============================================================ -->
-  <section class="closing">
-    <h2>Who gathered</h2>
-    <p>Facilitators and solopreneurs. L&amp;D pros. Nonprofit leaders. Government and public sector leaders. Higher ed faculty. K–12 educators. Faith leaders. And a room full of Connectors Summit alumni. Eight small groups, three days, one big idea.</p>
-    <p class="closing-note">Each conversation now lives only in the people who were there.</p>
-  </section>
 
   <!-- ============================================================ -->
   <!-- SUMMIT CTA -->
   <!-- ============================================================ -->
   <section class="suggest">
-    <h2>You build rooms for everyone else. This one’s built for you.</h2>
-    <p>If you’d love more things like this, the <strong>Connectors Summit</strong> is where it all leads. A fully virtual event this December, designed for depth.</p>
-    <a class="summit-cta" href="https://weand.me/connectors-summit">register your interest ›</a>
+    <h2>Join the next opportunity.</h2>
+    <p>If you’re interested in joining small groups with like-minded peers, people who are also leading and facilitating groups and events, register your interest in the <strong>Connectors Summit</strong>. A fully virtual event this December, designed for depth.</p>
+    <a class="summit-cta" href="https://weand.me/connectors-summit">Register Your Interest ›</a>
   </section>
+
+  <!-- ============================================================ -->
+  <!-- SUMMIT PEEK VIDEO -->
+  <!-- ============================================================ -->
+  <p class="capsule-line"><a class="lede-link video-link" href="https://www.youtube.com/watch?v=AeSdduSr5vw" target="_blank" rel="noopener"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor" opacity="0.15"/><path d="M9.8 7.5v9l7-4.5z" fill="currentColor"/></svg>Watch a 2-minute inside peek of the Connectors Summit</a></p>
 
   <!-- ============================================================ -->
   <!-- QUOTE (MOVED to bottom) -->
@@ -638,7 +618,7 @@
 <!-- ============================================================ -->
 <!-- VIDEO LIGHTBOX -->
 <!-- ============================================================ -->
-<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="The two-minute story behind this experiment" hidden>
+<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="A 2-minute inside peek of the Connectors Summit" hidden>
   <div class="video-dialog">
     <button class="video-close" type="button" aria-label="Close video">✕</button>
     <div class="video-frame"></div>
@@ -652,7 +632,7 @@
   if (!link || !modal) return;
   var frame = modal.querySelector('.video-frame');
   var closeBtn = modal.querySelector('.video-close');
-  var VIDEO_ID = 'gCikwfvJCKI';
+  var VIDEO_ID = 'AeSdduSr5vw';
 
   function openModal(e) {
     e.preventDefault();
@@ -660,9 +640,10 @@
     frame.innerHTML = '';
     var iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube-nocookie.com/embed/' + VIDEO_ID + '?autoplay=1&rel=0';
-    iframe.title = 'The two-minute story that sparked this experiment';
+    iframe.title = 'A 2-minute inside peek of the Connectors Summit';
     iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
     iframe.setAttribute('allowfullscreen', '');
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     frame.appendChild(iframe);
     modal.hidden = false;
     void modal.offsetHeight;
