@@ -186,6 +186,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
           <div class="email__actions">
             <button type="button" class="btn-sm btn-sm--solid" id="copy-email">Copy email</button>
             <button type="button" class="btn-sm" id="regen">Write another version</button>
+            <button type="button" class="btn-sm" id="short" aria-pressed="false">Short version</button>
           </div>
         </article>
         <div class="toast" role="status" aria-live="polite" hidden>
@@ -215,7 +216,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   var WHY={
     "c-engage":{line:"It’s all about practical ways to build real engagement and connection, so our team shows up more invested in each other and in the work.",short:"team engagement"},
     "c-meetings":{line:"It’s packed with practical ways to make our meetings more focused, more participatory, and more productive.",short:"running better meetings"},
-    "c-roi":{line:"It’s a practical, hands-on investment: I’d come back with tools we can use right away, plus recordings and cheat sheets we can keep reusing all year.",short:"getting real value for what we spend"},
+    "c-roi":{line:"It’s a practical, hands-on investment: I’d come back with tools we can use right away, plus recordings and cheat sheets we can keep reusing all year.",short:"making the most of our training budget"},
     "c-lead":{line:"It’s a strong leadership development opportunity, focused on leading conversations and groups in ways that build trust and get results.",short:"leadership development"},
     "c-culture":{line:"It’s centered on building the kind of connection and trust that strengthens our culture and makes people want to stay.",short:"retention and culture"},
     "c-hybrid":{line:"It’s full of practical strategies for engaging people in person, hybrid, and remote, which is exactly how our team works.",short:"leading hybrid and remote teams"},
@@ -262,6 +263,27 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
 
   // picks: chip ids in click order; role/goal: what the visitor typed; v: version number.
   // Returns paragraphs as arrays of plain-text and link pieces.
+  // Short version: one conversational paragraph for busy bosses. {FOCUS} = what this would help with.
+  var SHORTS=[
+    "I’d love to attend the {CS}, online December 9 to 11. It’s three days of world-class facilitation training with the people who literally write the books on how we gather, and it would really help with {FOCUS}. It’s $997 with no travel, and I’ll share the best tools with our team in January. Could you approve it sometime this week? It’s sold out the past two years, so an early yes will help my chances of getting in.",
+    "Quick ask: could I attend the {CS}, online December 9 to 11? It’s three days of world-class facilitation training from the people who write the books on how we gather (past speakers include Priya Parker and Peter Block), and it lines up well with {FOCUS}. It’s $997 with no travel costs, and I’ll bring the best tools back to the team in January. Would you be up for approving it this week? It’s sold out two years running, so an early yes helps.",
+    "I’d really like to go to the {CS}, online December 9 to 11. It’s three days of world-class facilitation training with the people who literally write the books on how we gather, and it’s right on target for {FOCUS}. At $997 with no travel, it costs a lot less than a typical conference, and I’ll share what I learn with the team in January. Could we decide sometime this week? It’s sold out the past two years, so an early yes will help my chances of getting in."
+  ];
+  var DEFAULT_FOCUS="how we run meetings and engage our team";
+
+  function composeShort(picks,goal,v){
+    goal=tidy(goal,160,true);
+    var known=picks.filter(function(k){return WHY[k]}).slice(0,goal?1:2).map(function(k){return WHY[k].short});
+    if(goal) known.push(goal);
+    var focus=known.length?list(known):DEFAULT_FOCUS;
+    var tpl=SHORTS[v%SHORTS.length].replace("{FOCUS}",focus);
+    var i=tpl.indexOf("{CS}");
+    return {
+      subject:SUBJECT,
+      paras:[["Hi [Boss’s name],"],[tpl.slice(0,i),{link:SUMMIT,text:"Connectors Summit"},tpl.slice(i+4)],["Details: ",{link:SUMMIT,text:SUMMIT}],[SIGNOFFS[v%SIGNOFFS.length],"\n[Your name]"]]
+    };
+  }
+
   function compose(picks,role,goal,v){
     var n=function(arr){return arr[v%arr.length]};
     var known=picks.filter(function(k){return WHY[k]});
@@ -297,7 +319,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   var otherChip=$("c-other"), otherWrap=$("other-wrap"), other=$("other"), role=$("role");
   var gen=$("gen"), email=$("email"), subjEl=$("email-subject"), bodyEl=$("email-body"), copyBtn=$("copy-email");
   var toast=document.querySelector(".toast"), toastText=document.querySelector(".toast__text");
-  var order=[], version=0, current=null, timer;
+  var order=[], version=0, current=null, timer, isShort=false;
 
   function esc(t){return t.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
   function htmlOf(e){
@@ -310,7 +332,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
   function render(){
     var picks=order.filter(function(id){return id!=="c-other"});
     var goal=otherChip.getAttribute("aria-pressed")==="true"?other.value:"";
-    current=compose(picks,role.value,goal,version);
+    current=isShort?composeShort(picks,goal,version):compose(picks,role.value,goal,version);
     subjEl.textContent=current.subject;
     bodyEl.innerHTML=htmlOf(current);
     email.hidden=false;
@@ -356,6 +378,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offse
     email.scrollIntoView({behavior:"smooth",block:"nearest"});
   });
   $("regen").addEventListener("click",function(){ version++; render(); });
+  var shortBtn=$("short");
+  shortBtn.addEventListener("click",function(){
+    isShort=!isShort;
+    shortBtn.setAttribute("aria-pressed",String(isShort));
+    shortBtn.textContent=isShort?"Full version":"Short version";
+    render();
+  });
   copyBtn.addEventListener("click",function(){
     if(!current) return;
     var e=current, html="<p><b>Subject:</b> "+esc(e.subject)+"</p>"+htmlOf(e);
